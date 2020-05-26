@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -22,13 +23,13 @@ class StockList extends React.Component {
 			return <span className="item" >Loading...</span>;
 		}
 
-		return this.props.stocks.map((stock) => {
+		return _.map(this.props.stocks, stock => {
 			const classes = this.props.selectedStock && stock.symbol === this.props.selectedStock.symbol ? 'item active' : 'item';
-			const labelClasses = stock.change < 0 ? 'ui horizontal label red' : 'ui horizontal label green';
+			const labelClasses = stock.regularMarketChangePercent.raw < 0 ? 'ui horizontal label red' : 'ui horizontal label green';
 			return (
 				<div key={ stock.symbol } className={classes} onClick={ () => this.props.selectStock(stock) }>
 					<h4>{ stock.symbol }</h4> 
-					${ stock.delayedPrice } <span className={labelClasses}>{ stock.change }</span>
+					${ stock.regularMarketPrice.fmt } <span className={labelClasses}>{ stock.regularMarketChangePercent.fmt }</span>
 				</div>
 			);
 		});

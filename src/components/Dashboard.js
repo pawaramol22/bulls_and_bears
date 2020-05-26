@@ -42,11 +42,11 @@ class Dashboard extends React.Component {
 		    		<h2>{ stock.symbol}</h2> 
 		    		<div>{ stock.companyName }</div>
 		    		<div>
-		    			<strong>${ stock.delayedPrice }</strong> <span className={labelClasses}>{ stock.change }</span> | AH: ${ stock.extendedPrice } <span className={ahLabelClasses}>{ stock.extendedChange }</span>
+		    			<strong>${ stock.regularMarketPrice.fmt }</strong> <span className={labelClasses}>{ stock.change }</span> | AH: { stock.postMarketPrice ? stock.postMarketPrice : '-'} <span className={ahLabelClasses}>{ stock.postMarketPrice ? stock.postMarketPrice : '-'} </span>
 		    		</div>
 				</div>
 				<div className="ui">
-					Market cap: {this.marketCap(stats.marketcap)} <br/>
+					Market cap: {this.marketCap(stock.price.marketcap)} <br/>
 					52 Week High: <span className="ui horizontal label green">{stats.week52high}</span> <br/>
 					52 Week Low: <span className="ui horizontal label red">{stats.week52low}</span> <br/>
 				</div>
